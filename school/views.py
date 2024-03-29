@@ -12,6 +12,16 @@ def home_view(request):
         return HttpResponseRedirect('afterlogin')
     return render(request,'school/index.html')
 
+#formdata
+def form_view(request):
+    if request.method == 'POST':
+        form = FormDataForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('afterlogin')  # Redirect to success page after form submission
+    else:
+        form = FormDataForm()
+    return render(request, 'form_template.html', {'form': form})
 
 
 #for showing signup/login button for teacher(by sumit)
